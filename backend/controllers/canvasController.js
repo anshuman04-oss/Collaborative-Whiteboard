@@ -78,8 +78,13 @@ exports.shareCanvas = async (req, res) => {
         const canvasId = req.params.id;
         const userId = req.userId;
 
+        if (typeof email !== "string" || email.trim() === "") {
+            return res.status(400).json({ error: "Valid email is required" });
+        }
+        const normalizedEmail = email.trim();
+
         // Find the user by email
-        const userToShare = await User.findOne({ email });
+        const userToShare = await User.findOne({ email: { $eq: normalizedEmail } });
         if (!userToShare) {
             return res.status(404).json({ error: "User with this email not found" });
         }
