@@ -31,7 +31,16 @@ exports.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        if (
+            typeof email !== "string" ||
+            typeof password !== "string" ||
+            !email.trim() ||
+            !password
+        ) {
+            return res.status(400).json({ error: "Invalid credentials" });
+        }
+
+        const user = await User.findOne({ email: { $eq: email } });
         if (!user) return res.status(400).json({ error: "Invalid credentials" });
 
         const isMatch = await user.comparePassword(password);
