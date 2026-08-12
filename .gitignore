@@ -1,0 +1,14 @@
+# Environment & Secrets
+*.env
+*.pem
+
+# Dependencies
+**/node_modules/
+
+# Build & Logs
+build/
+dist/
+*.log
+
+# System files
+.DS_Store
