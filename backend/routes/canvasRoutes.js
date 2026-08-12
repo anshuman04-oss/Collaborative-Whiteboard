@@ -5,7 +5,7 @@ const { rateLimiterMiddleware } = require("../middlewares/rateLimitMiddleware");
 
 const router = express.Router();
 
-router.use(authMiddleware, rateLimiterMiddleware);
+router.use(rateLimiterMiddleware, authMiddleware);
 
 router.post("/create", createCanvas); 
 router.put("/update", updateCanvas); 
