@@ -8,11 +8,16 @@ exports.registerUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
+        if (
+            typeof email !== "string" ||
+            typeof password !== "string" ||
+            !email.trim() ||
+            !password
+        ) {
             return res.status(400).json({ error: "All fields are required" });
         }
 
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email: { $eq: email } });
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
