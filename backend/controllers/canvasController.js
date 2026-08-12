@@ -28,7 +28,12 @@ exports.updateCanvas = async (req, res) => {
         const userId = req.userId;
         console.log("canvas id ", canvasId)
 
-        const canvas = await Canvas.findById(canvasId);
+        if (!mongoose.Types.ObjectId.isValid(canvasId)) {
+            return res.status(400).json({ error: "Invalid canvas ID" });
+        }
+
+        const safeCanvasId = new mongoose.Types.ObjectId(canvasId);
+        const canvas = await Canvas.findById(safeCanvasId);
         if (!canvas) {
             return res.status(404).json({ error: "Canvas not found" });
         }
