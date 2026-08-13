@@ -8,11 +8,16 @@ exports.registerUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
+        if (
+            typeof email !== "string" ||
+            typeof password !== "string" ||
+            !email.trim() ||
+            !password
+        ) {
             return res.status(400).json({ error: "All fields are required" });
         }
 
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ email: { $eq: email } });
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }
@@ -31,7 +36,16 @@ exports.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        const user = await User.findOne({ email });
+        if (
+            typeof email !== "string" ||
+            typeof password !== "string" ||
+            !email.trim() ||
+            !password
+        ) {
+            return res.status(400).json({ error: "Invalid credentials" });
+        }
+
+        const user = await User.findOne({ email: { $eq: email } });
         if (!user) return res.status(400).json({ error: "Invalid credentials" });
 
         const isMatch = await user.comparePassword(password);
