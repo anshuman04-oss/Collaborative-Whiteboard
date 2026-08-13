@@ -1,0 +1,2 @@
+Committing this time only to verify that the connection between Github Actions and EC2 instance is now set
+Earlier I didn't have docker in the EC2 instance. Now it has. So, it should run now.
