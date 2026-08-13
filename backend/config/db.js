@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+// Writing this comment only to check connectivity of Github Actions and EC2 server
 const mongoUrl = process.env.MONGO_URL;
 
 const connectDB = async () => {
