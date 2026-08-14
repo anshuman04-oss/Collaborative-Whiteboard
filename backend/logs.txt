@@ -1,5 +1,6 @@
 Committing this time only to verify that the connection between Github Actions and EC2 instance is now set
 Earlier I didn't have docker in the EC2 instance. Now it has. So, it should run now.
 14-8-2026
-Removed the repositories from EC2 container and used registry method to host backend where the instance doesn't need to have the whole
-source code. It can pull the docker image and just run the backend then and there
+1. Removed the repositories from EC2 container and used registry method to host backend where the instance doesn't need to have the whole
+source code. It can pull the docker image and just run the backend then and there.
+2. I hadn't updated the secret variable on Github, because of which the deploy job was failing continuously.
