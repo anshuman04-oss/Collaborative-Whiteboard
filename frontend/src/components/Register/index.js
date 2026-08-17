@@ -14,9 +14,9 @@ const Register = () => {
       alert("Passwords don't match");
       return;
     }
-    // BACKEND_URL: https://api-whiteboard-az.onrender.com/api
+    // process.env.REACT_APP_BACKEND_URL: https://api-whiteboard-az.onrender.com/api
     try {
-      const response = await fetch(BACKEND_URL/users/register, {
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL/users/register, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -71,7 +71,7 @@ function Board({ id }) {
     const fetchCanvasData = async () => {
       if (id && token) {
         try {
-          const response = await axios.get(`${BACKEND_URL}/canvas/load/${id}`, {
+          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/canvas/load/${id}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setCanvasId(id); // Set the current canvas ID

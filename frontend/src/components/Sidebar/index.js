@@ -27,7 +27,7 @@ const Sidebar = () => {
 
   const fetchCanvases = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/canvas/list`, {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/canvas/list`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCanvases(response.data);
@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   const handleCreateCanvas = async () => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/canvas/create`, {}, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/canvas/create`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log(response.data)  
@@ -67,7 +67,7 @@ const Sidebar = () => {
 
   const handleDeleteCanvas = async (id) => {
     try {
-      await axios.delete(`${BACKEND_URL}/canvas/delete/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/canvas/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchCanvases();
@@ -104,7 +104,7 @@ const Sidebar = () => {
       setSuccess(""); // Clear previous success message
 
       const response = await axios.put(
-        `${BACKEND_URL}/canvas/share/${canvasId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/canvas/share/${canvasId}`,
         { email },
         {
           headers: { Authorization: `Bearer ${token}` },
