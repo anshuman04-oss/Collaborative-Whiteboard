@@ -27,7 +27,7 @@ const Sidebar = () => {
 
   const fetchCanvases = async () => {
     try {
-      const response = await axios.get('https://api-whiteboard-az.onrender.com/api/canvas/list', {
+      const response = await axios.get(`${BACKEND_URL}/canvas/list`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCanvases(response.data);
@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   const handleCreateCanvas = async () => {
     try {
-      const response = await axios.post('https://api-whiteboard-az.onrender.com/api/canvas/create', {}, {
+      const response = await axios.post(`${BACKEND_URL}/canvas/create`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       console.log(response.data)  
@@ -67,7 +67,7 @@ const Sidebar = () => {
 
   const handleDeleteCanvas = async (id) => {
     try {
-      await axios.delete(`https://api-whiteboard-az.onrender.com/api/canvas/delete/${id}`, {
+      await axios.delete(`${BACKEND_URL}/canvas/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchCanvases();
@@ -104,7 +104,7 @@ const Sidebar = () => {
       setSuccess(""); // Clear previous success message
 
       const response = await axios.put(
-        `https://api-whiteboard-az.onrender.com/api/canvas/share/${canvasId}`,
+        `${BACKEND_URL}/canvas/share/${canvasId}`,
         { email },
         {
           headers: { Authorization: `Bearer ${token}` },
